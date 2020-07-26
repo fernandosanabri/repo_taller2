@@ -6,6 +6,11 @@ from empresas import empresas
 from servicios import servicios
 
 # Testing Route
+# Testing Route
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'response': 'pong!'})
+
 @app.route('/servicios',methods=['GET'])
 def getServicios():
     return jsonify({'servicios': servicios})
