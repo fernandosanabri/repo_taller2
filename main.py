@@ -11,18 +11,18 @@ from servicios import servicios
 def ping():
     return jsonify({'response': 'pong!'})
 
-@app.route('/servicios',methods=['GET'])
+@app.route('/v1/servicios',methods=['GET'])
 def getServicios():
     return jsonify({'servicios': servicios})
 
 # Get Data Routes
-@app.route('/empresas')
+@app.route('/v1/empresas')
 def getEmpresas():
     # return jsonify(empresas)
     return jsonify({'empresas': empresas})
 
 
-@app.route('/empresas/<string:empresa_name>')
+@app.route('/v1/empresas/<string:empresa_name>')
 def getempresa(empresa_name):
     empresasFound = [empresa for empresa in empresas if empresa['name'] == empresa_name.lower()]
     if (len(empresasFound) > 0):
@@ -30,7 +30,7 @@ def getempresa(empresa_name):
     return jsonify({'message': 'empresa Not found'})
 
 # Create Data Routes
-@app.route('/empresas', methods=['POST'])
+@app.route('/v1/empresas', methods=['POST'])
 def addEmpresa():
     new_empresa = {
         'name': request.json['name'],
@@ -41,7 +41,7 @@ def addEmpresa():
     return jsonify({'empresas': empresas})
 
 # Update Data Route
-@app.route('/empresas/<string:empresa_name>', methods=['PUT'])
+@app.route('/v1/empresas/<string:empresa_name>', methods=['PUT'])
 def editEmpresa(empresa_name):
     empresasFound = [empresa for empresa in empresas if empresa['name'] == empresa_name]
     if (len(empresasFound) > 0):
@@ -55,7 +55,7 @@ def editEmpresa(empresa_name):
     return jsonify({'message': 'empresa Not found'})
 
 # DELETE Data Route
-@app.route('/empresas/<string:empresa_name>', methods=['DELETE'])
+@app.route('/v1/empresas/<string:empresa_name>', methods=['DELETE'])
 def deleteEmpresa(empresa_name):
     empresasFound = [empresa for empresa in empresas if empresa['name'] == empresa_name]
     if len(empresasFound) > 0:
